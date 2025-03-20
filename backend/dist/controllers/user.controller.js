@@ -41,7 +41,7 @@ const getUserByUsername = (req, res) => {
  */
 const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password, firstname, lastname } = req.body;
-    if (!username || !password) {
+    if (!username || !password || !firstname || !lastname) {
         res.status(500).json({ message: "Username or password is missing" });
         return;
     }

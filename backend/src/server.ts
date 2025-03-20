@@ -3,6 +3,8 @@ import cors from 'cors'
 import cookieSession from 'cookie-session'
 import userRouter from './routes/user.routes'
 import dotenv from 'dotenv'
+import entryRouter from './routes/entry.routes'
+
 dotenv.config()
 
 const app = express()
@@ -23,7 +25,11 @@ app.use(cookieSession({
 }))
 app.use(express.json())
 
-app.use('/users', userRouter)
+app.use('/user', userRouter)
+
+// Diary/Journal routes
+app.use('/entry', entryRouter); // Add the diary routes here
+
 
 app.use((req: Request, res: Response) => {
   res.status(404).send('Page not found!')

@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const cookie_session_1 = __importDefault(require("cookie-session"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const entry_routes_1 = __importDefault(require("./routes/entry.routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
@@ -25,7 +26,9 @@ app.use((0, cookie_session_1.default)({
     maxAge: 5 * 60 * 1000
 }));
 app.use(express_1.default.json());
-app.use('/users', user_routes_1.default);
+app.use('/user', user_routes_1.default);
+// Diary/Journal routes
+app.use('/entry', entry_routes_1.default); // Add the diary routes here
 app.use((req, res) => {
     res.status(404).send('Page not found!');
 });

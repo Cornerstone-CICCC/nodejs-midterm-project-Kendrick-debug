@@ -31,7 +31,7 @@ const getUserByUsername = (req: Request, res: Response) => {
  */
 const addUser = async (req: Request<{}, {}, Omit<User, 'id'>>, res: Response) => {
   const { username, password, firstname, lastname } = req.body
-  if (!username || !password) {
+  if (!username || !password || !firstname  || !lastname) {
     res.status(500).json({ message: "Username or password is missing" })
     return
   }
@@ -41,6 +41,7 @@ const addUser = async (req: Request<{}, {}, Omit<User, 'id'>>, res: Response) =>
     firstname,
     lastname
   })
+  
   if (!user) {
     res.status(409).json({ message: "Username is taken!" })
     return
