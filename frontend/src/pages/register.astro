@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+  <main class="auth-container">
+    <div>
+      <h1>Register To Enter Into Your Own World</h1>
+      <form id="form-signup">
+        <label for="username">
+          Username:
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter your username"
+            autocomplete="off"
+            required
+          />
+        </label>
+        <label for="password">
+          Password:
+          <input
+            type="text"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="off"
+            required
+          />
+        </label>
+        <div>
+          <label for="firstname">
+            First Name:
+            <input
+              type="text"
+              name="firstname"
+              id="firstname"
+              placeholder="Enter your name"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label for="lastname">
+            Last Name:
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              placeholder="Enter your last name"
+              autocomplete="off"
+              required
+            />
+          </label>
+        </div>
+        <div>
+          <button>Sign up</button>
+          <p>
+            Already have an account? <a href="/login">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const form = document.querySelector("#form-signup") as HTMLFormElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const formObj = Object.fromEntries(formData.entries()); // Converts form data to JS object
+    const res = await fetch(`http://localhost:3500/users/signup`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formObj),
+    });
+    if (!res.ok) {
+      console.error("Something went wrong");
+      return;
+    }
+    window.location.href = "/login";
+  });
+</script>

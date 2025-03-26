@@ -1,0 +1,132 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+  <main class="profile-container">
+    <h1>Your Profile</h1>
+    <ul>
+      <li>
+        <strong>Username:</strong>
+        <span id="username">JohnDoe</span>
+      </li>
+      <li>
+        <strong>First Name:</strong>
+        <span id="firstname">John</span>
+      </li>
+      <li>
+        <strong>Last Name:</strong>
+        <span id="lastname">Doe</span>
+      </li>
+    </ul>
+    <a href="/logout">Log Out</a>
+    <a href="/" class="home-button">Return</a>
+  </main>
+</Layout>
+
+<script>
+  const profile = document.querySelector(
+    ".profile-container"
+  ) as HTMLDivElement;
+
+  const checkAuth = async () => {
+    const res = await fetch(`http://localhost:3500/users/check-auth`, {
+      method: "GET",
+      credentials: "include",
+    });
+    if (!res.ok) {
+      window.location.href = "/login";
+      return;
+    }
+    const data = await res.json();
+    profile.style.display = "block";
+    (profile.querySelector("#username") as HTMLSpanElement).innerHTML =
+      data.username;
+    (profile.querySelector("#firstname") as HTMLSpanElement).innerHTML =
+      data.firstname;
+    (profile.querySelector("#lastname") as HTMLSpanElement).innerHTML =
+      data.lastname;
+  };
+
+  checkAuth();
+</script>
+
+<style>
+  /* Profile Section Styling */
+  .profile-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Arial", sans-serif;
+    text-align: center;
+  }
+
+  .profile-container h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .profile-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .profile-container li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .profile-container li strong {
+    color: #333;
+  }
+
+  .profile-container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .profile-container a:hover {
+    background-color: #218838;
+    transform: translateY(-3px); /* Move the button slightly upward on hover */
+  }
+
+  .profile-container a:active {
+    transform: translateY(0); /* Reset the position when clicked */
+  }
+
+  /* Add subtle animations */
+  .profile-container {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
