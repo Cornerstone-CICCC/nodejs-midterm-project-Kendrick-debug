@@ -1,0 +1,525 @@
+/* General Page Styling */
+/* General Background Styling */
+/*  Adding Some Fonts*/
+body {
+  background-image: url('../../public/jourrnal.image.jpg');
+  background-size: cover;  
+  background-position: center; 
+  background-attachment: fixed;
+  background-repeat: no-repeat; 
+  color: #333; 
+  font-family: "Arial", sans-serif; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+
+
+/* General Form Styling */
+form {
+  opacity: 0; /* Start hidden */
+  transform: translateY(20px); /* Start slightly below */
+  animation: slideIn 0.8s ease-in-out forwards; /* Slide-in animation */
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #555;
+}
+
+form input,
+form textarea,
+form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+form button:active {
+  transform: scale(0.95); /* Slightly shrink on click */
+}
+
+/* Slide-In Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.auth-container,
+.profile-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.auth-container h1,
+.profile-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.auth-container p,
+.profile-container p {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form label {
+  font-size: 1rem;
+  color: #333;
+}
+
+form input,
+form button {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  
+}
+
+form input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Links */
+form a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 0.9rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+
+}
+
+form a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+  text-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+
+}
+
+form button:active {
+  transform: scale(0.95); 
+}
+
+/* Profile Section */
+.profile-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-container li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.profile-container a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-container a:hover {
+  background-color: #218838;
+  transform: translateY(-3px); /* Move the button slightly upward on hover */
+}
+profile-container a:active {
+  transform: translateY(0); /* Reset the position when clicked */
+}
+
+
+/* Footer Styling */
+/* Footer Styling */
+.footer {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 60px 20px;
+  font-family: "Arial", sans-serif;
+  text-align: left;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.footer-about,
+.footer-social,
+.footer-contact {
+  background-color: #495057;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer-about h3,
+.footer-social h3,
+.footer-contact h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.footer-about p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.footer-social ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-social ul li {
+  margin: 12px 0;
+}
+
+.footer-social ul li a {
+  text-decoration: none;
+  color: #f8f9fa;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-social ul li a:hover {
+  color: #007bff;
+}
+
+.footer-contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-contact input,
+.footer-contact textarea {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-contact input:focus,
+.footer-contact textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.footer-contact button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-contact button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.footer-contact button:active {
+  transform: scale(0.95);
+}
+
+
+
+
+/* Footer Bottom Styling */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #adb5bd;
+}
+
+
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.footer-social ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-social li {
+  margin-bottom: 10px;
+}
+
+.footer-social a {
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  gap: 10px; 
+  color: #f8f9fa;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #007bff; /* Blue color on hover */
+}
+
+.footer-social i {
+  font-size: 1.2rem; /* Icon size */
+}
+
+
+/* Header styles */
+header {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #004080;
+  flex-wrap: wrap; 
+  padding: 15px 20px;
+}
+
+header h1 {
+  font-size: 2rem; /* here im gonna chaneg the way the headers look like */
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+header h1:hover {
+  color: #ffd700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;  
+  flex-wrap: wrap; 
+  gap: 10px;
+}
+.navbar {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Vertically center items */
+  justify-content: space-between; /* Space between logo and links */
+  max-width: 1200px; /* Limit the width of the navbar */
+  margin: 0 auto; /* Center the navbar horizontally */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+  font-size: 0.9rem; /* Reduce font size for smaller screens */
+  padding: 8px 15px;
+}
+
+.nav-links a:hover {
+  background: #004080;
+  color: #ffd700;
+}
+
+/* Button styles for login/register */
+.hero-buttons a {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease; /* Add smooth transitions */
+  display: inline-block;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.her p {
+  padding: 20px;
+}
+.hero-buttons .btn-primary {
+  background-color: #28a745; /* Green for Login */
+  color: white;
+}
+
+.hero-buttons .btn-secondary {
+  background-color: #ff6f61; /* Red for Sign Up */
+  color: white;
+}
+
+.hero-buttons a:hover {
+  background-color: #0056b3; /* Change background color on hover */
+  color: #ffd700; /* Change text color on hover */
+  transform: scale(1.1); /* Slightly enlarge the button on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.hero-buttons a:active {
+  transform: scale(0.95); /* Slightly shrink the button on click */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Reduce shadow on click */
+}
+
+#title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+
+
+
+}
+
+#entries-list p {
+  font-size: 1.2rem;
+  color: black;
+
+
+}
+
+#button   {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #0d1b2a;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 10px;
+  padding: 20px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+}
+#button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#button:hover span {
+  padding-right: 25px;
+}
+
+
+
+#date {
+    font-size: larger;
+}
+
+#content {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 200;
+  font-size: 80px;
+  font-style: 30px;
+}

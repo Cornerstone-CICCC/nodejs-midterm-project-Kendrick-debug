@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Baskervville&family=Bebas+Neue&family=Faculty+Glyphic&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+    </style>
+    <title>My Journal</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <a href="/" class="logo">My Journal </a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/register">Sign Up</a></li>
+          <li><a href="/login">Log In</a></li>
+        </ul>
+      </nav>
+    </header>
+    <slot />
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- About Section -->
+        <div class="footer-about">
+          <h3>About My Journal</h3>
+          <p>
+            Welcome to Your Personal Space for Reflection and Growth In a world
+            that moves fast, your journal is your quiet corner...a place to
+            pause, breathe, and express what matters most to you. Whether you're
+            capturing your dreams, organizing your thoughts, or documenting your
+            journey, this journal is designed to be as unique as you are. What
+            You'll Find Here: A safe space for your thoughts, feelings, and
+            experiences. Simple tools to help you organize and track your
+            personal growth. Prompts to spark creativity and inspiration
+            whenever you need it. A reminder that every entry—big or small—is a
+            step toward understanding yourself better. So, dive in. Write
+            fearlessly, reflect deeply, and let your story unfold.
+          </p>
+        </div>
+
+        <!-- Social Media Section -->
+        <!-- Social Media Section -->
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <ul>
+            <li>
+              <a href="https://facebook.com" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+                Facebook - "Stay connected with us on Facebook!"
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com" target="_blank">
+                <i class="fab fa-twitter"></i>
+                Twitter - "Get the latest updates and news!"
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com" target="_blank">
+                <i class="fab fa-instagram"></i>
+                Instagram - "Explore our visual stories!"
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+                LinkedIn - "Connect with us professionally!"
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <form id="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows="4"
+              required></textarea>
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 My Journal App. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

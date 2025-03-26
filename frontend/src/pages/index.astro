@@ -1,0 +1,471 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+  <main class="home-container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Welcome to Your Personal Journal</h1>
+      <p>Start keeping track of your thoughts, ideas, and experiences.</p>
+      <div class="hero-buttons">
+        <a href="/login" class="btn-primary">Login</a>
+        <a href="/register" class="btn-secondary">Sign Up</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="feature-card">
+        <h2>Your Entries</h2>
+        <p>Keep track of your personal thoughts and experiences with ease.</p>
+      </div>
+      <div class="feature-card">
+        <h2>Edit & Update</h2>
+        <p>
+          Modify and update your entries anytime to reflect your latest
+          thoughts.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h2>Search Functionality</h2>
+        <p>
+          Quickly find any entry with our search feature. Just type and search!
+        </p>
+      </div>
+    </section>
+
+    <!-- Journal Entries Section -->
+    <section class="journal-container">
+      <h2>Your Journal Entries</h2>
+
+      <!-- Search Bar -->
+      <input type="text" id="search-input" placeholder="Search entries..." />
+
+      <!-- Add New Entry Form -->
+      <form id="add-entry-form">
+        <label for="entry-title">Title:</label>
+        <input
+          type="text"
+          id="entry-title"
+          name="title"
+          placeholder="Title of your journal entry"
+          required
+        />
+
+        <label for="entry-content">Content:</label>
+        <textarea
+          id="entry-content"
+          name="content"
+          placeholder="Write your thoughts here..."
+          required></textarea>
+
+        <label for="entry-date">Date:</label>
+        <input type="date" id="entry-date" name="date" required />
+
+        <button type="submit">Add Entry</button>
+      </form>
+
+      <!-- Entries List -->
+      <section class="entries-container">
+        <h2>Your Entries</h2>
+        <ul id="entries-list">
+          <p>No entries yet. Start by adding one!</p>
+        </ul>
+      </section>
+      <!-- About Section -->
+      <section class="about">
+        <h2>About</h2>
+        <p>
+          This application allows you to create, edit, and search through your
+          personal journal entries. Whether it's a quick note or a long
+          reflection, this journal will keep your thoughts organized and easily
+          accessible.
+        </p>
+      </section>
+    </section>
+
+    <script>
+      const form = document.querySelector("#add-entry-form");
+      const searchInput = document.querySelector("#search-input");
+      const entriesList = document.querySelector("#entries-list");
+
+      let entries = JSON.parse(localStorage.getItem("entries")) || [];
+
+      // Render entries
+      const renderEntries = (filter = "") => {
+        entriesList.innerHTML = "";
+        const filteredEntries = entries.filter((entry) =>
+          entry.title.toLowerCase().includes(filter.toLowerCase())
+        );
+
+        if (filteredEntries.length === 0) {
+          entriesList.innerHTML = "<p>No matching entries found.</p>";
+        } else {
+          filteredEntries.forEach((entry, index) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+            <h3 id="title">${entry.title}</h3>
+            <p id="content">${entry.content}</p>
+            <small id="date">${entry.date}</small>
+            <button id="button" onclick="editEntry(${index})">Edit</button>
+            <button id="button" onclick="deleteEntry(${index})">Delete</button>
+          `;
+            entriesList.appendChild(li);
+          });
+        }
+      };
+
+      // Add new entry
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const title = document.querySelector("#entry-title").value;
+        const content = document.querySelector("#entry-content").value;
+        const date = document.querySelector("#entry-date").value;
+
+        const newEntry = { title, content, date };
+        entries.push(newEntry);
+        localStorage.setItem("entries", JSON.stringify(entries));
+
+        form.reset();
+        renderEntries();
+      });
+
+      // Search functionality
+      searchInput.addEventListener("input", (e) => {
+        const filter = e.target.value;
+        renderEntries(filter);
+      });
+
+      // Edit an entry
+      window.editEntry = (index) => {
+        const entry = entries[index];
+        document.querySelector("#entry-title").value = entry.title;
+        document.querySelector("#entry-content").value = entry.content;
+        document.querySelector("#entry-date").value = entry.date;
+
+        entries.splice(index, 1);
+        localStorage.setItem("entries", JSON.stringify(entries));
+        renderEntries();
+      };
+
+      // Delete an entry
+      window.deleteEntry = (index) => {
+        entries.splice(index, 1);
+        localStorage.setItem("entries", JSON.stringify(entries));
+        renderEntries();
+      };
+
+      renderEntries();
+    </script>
+  </main>
+
+  <style>
+    .home-container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      font-family: "Arial", sans-serif;
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: black;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      margin: 10px;
+      padding: 15px 30px;
+      border-radius: 5px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-secondary {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      background-color: #0056b3;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      gap: 30px; /* Add spacing between the cards */
+      margin-top: 50px;
+      flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    }
+
+    .feature-card {
+      width: 30%;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 10px; /* Add margin to ensure spacing even if wrapping occurs */
+      opacity: 0; /* Start hidden for fade-in animation */
+      transform: translateY(20px); /* Start slightly below for animation */
+      animation: fadeIn 0.8s ease-in-out forwards; /* Fade-in animation */
+    }
+
+    .feature-card:nth-child(1) {
+      animation-delay: 0.2s; /* Delay for the first card */
+    }
+
+    .feature-card:nth-child(2) {
+      animation-delay: 0.4s; /* Delay for the second card */
+    }
+
+    .feature-card:nth-child(3) {
+      animation-delay: 0.6s; /* Delay for the third card */
+    }
+
+    .feature-card:hover {
+      transform: scale(1.05); /* Slightly enlarge on hover */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .feature-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .about {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      color: #555;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    /* Journal Container */
+    .journal-container {
+      margin-top: 50px;
+      text-align: center;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .journal-container h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    /* Search Bar */
+    #search-input {
+      width: 80%;
+      max-width: 600px;
+      padding: 10px;
+      font-size: 1rem;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    #search-input:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Add Entry Form */
+    #add-entry-form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    #add-entry-form input,
+    #add-entry-form textarea,
+    #add-entry-form button {
+      width: 80%;
+      max-width: 600px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    #add-entry-form input:focus,
+    #add-entry-form textarea:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+    #add-entry-form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+    }
+
+    #add-entry-form button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    #add-entry-form button:active {
+      transform: scale(0.95);
+    }
+
+    /* Entries List */
+    #entries-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 30px;
+      color: black;
+    }
+
+    #entries-list li {
+      background-color: #ffffff;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      position: relative;
+      border: 1px solid #e0e0e0;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    #entries-list li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    #entries-list li h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    #entries-list li small {
+      font-size: 0.9rem;
+      color: #888;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    #entries-list button {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+      margin-right: 10px;
+    }
+
+    #entries-list .edit-btn {
+      background-color: #17a2b8;
+      color: white;
+    }
+
+    #entries-list .delete-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    #entries-list .edit-btn:hover {
+      background-color: #138496;
+      transform: scale(1.05);
+    }
+
+    #entries-list .delete-btn:hover {
+      background-color: #c82333;
+      transform: scale(1.05);
+    }
+
+    ul#entries-list p {
+      margin-top: 20px;
+      color: black;
+    }
+
+    .entries-container {
+      margin-top: 50px;
+      text-align: center;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</Layout>
